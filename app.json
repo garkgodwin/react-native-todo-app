@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "first-react-native-project",
-    "slug": "first-react-native-project",
+    "name": "Todo App",
+    "slug": "todo-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/todo-100.png",
     "userInterfaceStyle": "light",
     "backgroundColor": "#FFFFFF",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/Loading.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
