@@ -6,7 +6,10 @@ import {
   Button,
   TextInput,
   ScrollView,
+  FlatList,
 } from "react-native";
+import TodoInput from "./components/TodoInput";
+import TodoItem from "./components/TodoItem";
 
 export default function App() {
   const [inputTodo, setInputTodo] = useState("");
@@ -24,23 +27,24 @@ export default function App() {
 
   return (
     <View style={styles.appContainer}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.textInput}
-          placeholder="What do you want to do?"
-          value={inputTodo}
-          onChangeText={todoInputHandler}
-        />
-        <Button title="Add this" onPress={addTodoHandler} />
-      </View>
+      <TodoInput
+        inputTodo={inputTodo}
+        todoInputHandler={todoInputHandler}
+        addTodoHandler={addTodoHandler}
+      />
       <View style={styles.todosContainer}>
-        <ScrollView>
-          {todos.map((todo, index) => (
-            <View style={styles.todoItemContainer} key={index}>
-              <Text style={styles.todoItemText}>{todo}</Text>
-            </View>
-          ))}
-        </ScrollView>
+        <FlatList
+          data={todos}
+          renderItem={(itemData) => {
+            //itemData is metadata
+            //itemData.item is the data of a renderedItem
+            return <TodoItem itemData={itemData} />;
+          }}
+          keyExtractor={(item, index) => {
+            return index;
+          }}
+          alwaysBounceVertical={false}
+        />
       </View>
     </View>
   );
@@ -53,36 +57,11 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
   },
-  inputContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flex: 1,
-  },
-  textInput: {
-    borderWidth: 1,
-    borderColor: "#cccccc",
-    width: "70%",
-    marginRight: 8,
-  },
   todosContainer: {
     flex: 11,
     marginTop: 24,
     borderColor: "transparent",
     borderTopColor: "#cccccc",
     borderWidth: 1,
-  },
-  todoItemContainer: {
-    backgroundColor: "#3a3b3c",
-    justifyContent: "center",
-    height: 40,
-    fontSize: 16,
-    marginTop: 4,
-    borderRadius: 8,
-    padding: 4,
-    paddingHorizontal: 8,
-  },
-  todoItemText: {
-    color: "white",
   },
 });
